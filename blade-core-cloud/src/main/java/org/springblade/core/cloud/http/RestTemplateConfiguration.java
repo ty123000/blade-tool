@@ -18,6 +18,7 @@ package org.springblade.core.cloud.http;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
+import okhttp3.OkHttpClient;
 import org.springblade.core.cloud.header.BladeFeignAccountGetter;
 import org.springblade.core.cloud.props.BladeFeignHeadersProperties;
 import org.springblade.core.tool.utils.Charsets;
@@ -27,7 +28,6 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
-import org.springframework.cloud.openfeign.support.FeignHttpClientProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Profile;
 import org.springframework.http.client.OkHttp3ClientHttpRequestFactory;
@@ -104,33 +104,24 @@ public class RestTemplateConfiguration {
 		return new okhttp3.ConnectionPool(maxIdleConnections, keepAliveDuration, TimeUnit.MILLISECONDS);
 	}
 
-//	/**
-//	 * 配置OkHttpClient
-//	 *
-//	 * @param httpClientFactory    httpClient 工厂
-//	 * @param connectionPool       链接池配置
-//	 * @param httpClientProperties httpClient配置
-//	 * @param interceptor          拦截器
-//	 * @return OkHttpClient
-//	 */
-//	@Bean
-//	@ConditionalOnMissingBean(okhttp3.OkHttpClient.class)
-//	public okhttp3.OkHttpClient httpClient(
-//		OkHttpClientFactory httpClientFactory,
-//		okhttp3.ConnectionPool connectionPool,
-//		FeignHttpClientProperties httpClientProperties,
-//		HttpLoggingInterceptor interceptor) {
-//		Boolean followRedirects = httpClientProperties.isFollowRedirects();
-//		Integer connectTimeout = httpClientProperties.getConnectionTimeout();
-//		return httpClientFactory.createBuilder(httpClientProperties.isDisableSslValidation())
-//			.connectTimeout(connectTimeout, TimeUnit.MILLISECONDS)
-//			.writeTimeout(30, TimeUnit.SECONDS)
-//			.readTimeout(30, TimeUnit.SECONDS)
-//			.followRedirects(followRedirects)
-//			.connectionPool(connectionPool)
-//			.addInterceptor(interceptor)
-//			.build();
-//	}
+	/**
+	 * 配置OkHttpClient
+	 *
+	 * @param connectionPool 链接池配置
+	 * @param interceptor    拦截器
+	 * @return OkHttpClient
+	 */
+	@Bean
+	@ConditionalOnMissingBean(okhttp3.OkHttpClient.class)
+	public okhttp3.OkHttpClient httpClient(
+		okhttp3.ConnectionPool connectionPool,
+		HttpLoggingInterceptor interceptor) {
+		OkHttpClient okHttpClient = new OkHttpClient();
+		OkHttpClient.Builder builder = okHttpClient.newBuilder();
+		builder.setConnectionPool$okhttp(connectionPool);
+		builder.addInterceptor(interceptor);
+		return builder.build();
+	}
 
 	@Bean
 	public RestTemplateHeaderInterceptor requestHeaderInterceptor(

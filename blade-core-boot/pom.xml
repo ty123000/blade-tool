@@ -57,11 +57,11 @@
             <artifactId>blade-core-log</artifactId>
             <version>${blade.tool.version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.springblade</groupId>
-            <artifactId>blade-core-swagger</artifactId>
-            <version>${blade.tool.version}</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.springblade</groupId>-->
+<!--            <artifactId>blade-core-swagger</artifactId>-->
+<!--            <version>${blade.tool.version}</version>-->
+<!--        </dependency>-->
         <!--MyBatis-->
         <dependency>
             <groupId>org.springblade</groupId>
