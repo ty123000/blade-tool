@@ -56,6 +56,12 @@
             <groupId>org.springblade</groupId>
             <artifactId>blade-core-log</artifactId>
             <version>${blade.tool.version}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>mybatis-spring</artifactId>
+                    <groupId>org.mybatis</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
 <!--        <dependency>-->
 <!--            <groupId>org.springblade</groupId>-->
