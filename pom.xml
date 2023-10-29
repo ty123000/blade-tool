@@ -44,8 +44,8 @@
 <!--        <knife4j.version>4.5.0-SNAPSHOT</knife4j.version>-->
         <mybatis.version>3.5.13</mybatis.version>
         <mybatis.spring.version>3.0.2</mybatis.spring.version>
-        <mybatis.plus.version>3.5.3.2</mybatis.plus.version>
-        <mybatis.plus.generator.version>3.5.3.2</mybatis.plus.generator.version>
+        <mybatis.plus.version>3.5.4</mybatis.plus.version>
+        <mybatis.plus.generator.version>3.5.4</mybatis.plus.generator.version>
         <protostuff.version>1.6.0</protostuff.version>
         <disruptor.version>3.4.2</disruptor.version>
         <guava.version>31.1-jre</guava.version>
