@@ -66,6 +66,11 @@
 
         <swagger.version>1.6.11</swagger.version>
         <httpclient.version>4.5.14</httpclient.version>
+
+        <spring.kafka.version>3.0.12</spring.kafka.version>
+        <kafka.clients.version>3.6.0</kafka.clients.version>
+
+        <fastjson.version>2.0.41</fastjson.version>
     </properties>
 
     <modules>
@@ -86,6 +91,7 @@
 <!--        <module>blade-core-report</module>-->
         <module>blade-core-datascope</module>
         <module>blade-core-crypto</module>
+        <module>blade-core-mq</module>
     </modules>
 
     <dependencyManagement>
