@@ -43,6 +43,7 @@ public interface TokenConstant {
 	String LICENSE_NAME = "powered by blade";
 	String DEFAULT_AVATAR = "https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png";
 	Integer AUTH_LENGTH = 7;
+	String USER_TYPE = "user_type";
 
 	/**
 	 * token签名

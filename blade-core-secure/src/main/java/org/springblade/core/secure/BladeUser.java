@@ -17,6 +17,7 @@ package org.springblade.core.secure;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
+import org.springblade.core.secure.enums.UserType;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -74,5 +75,10 @@ public class BladeUser implements Serializable {
 	 */
 	@Schema(accessMode = READ_ONLY)
 	private String roleName;
+	/**
+	 * 用户类型 {@link UserType}
+	 */
+	@Schema(accessMode = READ_ONLY)
+	private UserType userType;
 
 }

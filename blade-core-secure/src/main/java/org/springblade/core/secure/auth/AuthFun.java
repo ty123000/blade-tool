@@ -15,7 +15,10 @@
  */
 package org.springblade.core.secure.auth;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.springblade.core.launch.constant.TokenConstant;
+import org.springblade.core.secure.BladeUser;
+import org.springblade.core.secure.enums.UserType;
 import org.springblade.core.secure.utils.SecureUtil;
 import org.springblade.core.tool.constant.RoleConstant;
 import org.springblade.core.tool.utils.CollectionUtil;
@@ -23,7 +26,6 @@ import org.springblade.core.tool.utils.Func;
 import org.springblade.core.tool.utils.StringUtil;
 import org.springblade.core.tool.utils.WebUtil;
 
-import jakarta.servlet.http.HttpServletRequest;
 import java.util.Objects;
 
 /**
@@ -68,7 +70,14 @@ public class AuthFun {
 	 * @return {boolean}
 	 */
 	public boolean hasAnyRole(String... role) {
-		String userRole = SecureUtil.getUser().getRoleName();
+		BladeUser user = SecureUtil.getUser();
+		if (user == null) {
+			return false;
+		}
+		if (UserType.ADMIN != user.getUserType()) {
+			return false;
+		}
+		String userRole = user.getRoleName();
 		if (StringUtil.isBlank(userRole)) {
 			return false;
 		}

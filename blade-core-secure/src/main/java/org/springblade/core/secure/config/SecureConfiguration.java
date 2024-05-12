@@ -17,6 +17,7 @@ package org.springblade.core.secure.config;
 
 
 import lombok.AllArgsConstructor;
+import org.springblade.core.secure.aspect.AppLoginAspect;
 import org.springblade.core.secure.aspect.AuthAspect;
 import org.springblade.core.secure.interceptor.ClientInterceptor;
 import org.springblade.core.secure.interceptor.SecureInterceptor;
@@ -66,6 +67,11 @@ public class SecureConfiguration implements WebMvcConfigurer {
 	@Bean
 	public AuthAspect authAspect() {
 		return new AuthAspect();
+	}
+
+	@Bean
+	public AppLoginAspect appLoginAspect() {
+		return new AppLoginAspect();
 	}
 
 	@Bean

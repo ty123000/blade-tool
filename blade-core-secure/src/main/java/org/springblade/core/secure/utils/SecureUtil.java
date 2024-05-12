@@ -19,11 +19,13 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.SneakyThrows;
 import org.springblade.core.launch.constant.TokenConstant;
 import org.springblade.core.secure.BladeUser;
 import org.springblade.core.secure.TokenInfo;
 import org.springblade.core.secure.constant.SecureConstant;
+import org.springblade.core.secure.enums.UserType;
 import org.springblade.core.secure.exception.SecureException;
 import org.springblade.core.secure.props.BladeTokenProperties;
 import org.springblade.core.secure.provider.IClientDetails;
@@ -32,7 +34,6 @@ import org.springblade.core.tool.constant.RoleConstant;
 import org.springblade.core.tool.utils.*;
 
 import javax.crypto.spec.SecretKeySpec;
-import jakarta.servlet.http.HttpServletRequest;
 import java.security.Key;
 import java.util.*;
 
@@ -56,6 +57,7 @@ public class SecureUtil {
 	private final static String TENANT_ID = TokenConstant.TENANT_ID;
 	private final static String CLIENT_ID = TokenConstant.CLIENT_ID;
 	private final static Integer AUTH_LENGTH = TokenConstant.AUTH_LENGTH;
+	private final static String USER_TYPE = TokenConstant.USER_TYPE;
 	private static IClientDetailsService CLIENT_DETAILS_SERVICE;
 	private static BladeTokenProperties TOKEN_PROPERTIES;
 	private static String BASE64_SECURITY;
@@ -157,6 +159,7 @@ public class SecureUtil {
 		String account = Func.toStr(claims.get(SecureUtil.ACCOUNT));
 		String roleName = Func.toStr(claims.get(SecureUtil.ROLE_NAME));
 		String userName = Func.toStr(claims.get(SecureUtil.USER_NAME));
+		int userType = Func.toInt(claims.get(SecureUtil.USER_TYPE));
 		BladeUser bladeUser = new BladeUser();
 		bladeUser.setClientId(clientId);
 		bladeUser.setUserId(userId);
@@ -166,6 +169,7 @@ public class SecureUtil {
 		bladeUser.setDeptId(deptId);
 		bladeUser.setRoleName(roleName);
 		bladeUser.setUserName(userName);
+		bladeUser.setUserType(UserType.of(userType));
 		return bladeUser;
 	}
 
